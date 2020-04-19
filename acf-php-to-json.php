@@ -6,11 +6,14 @@ class AcfPhpToJson {
     public $post_type = 'acf-field-group';
 
     private $groups = [];
-    private $dom;
+    
+    function __construct()
+    {
+        $this->groups = $this->get_acf_field_goups();
+    }
 
-    function __construct(){}
-
-    public function renderMainPage() { 
+    public function renderMainPage() 
+    { 
         if (!isset($_GET['convert']) || $_GET['convert'] !== 'json') {
             return $this->renderIntroPage();
         }
@@ -18,21 +21,17 @@ class AcfPhpToJson {
         return $this->renderConvertPage();        
     }
 
-    /**
-     * 
-     */
-    private function renderIntroPage() {
-        $groups = $this->get_acf_field_goups();
-        if (empty($groups)) {
+    private function renderIntroPage() 
+    {
+        if (empty($this->groups)) {
             return $this->createIntroPageContent('Field Groups Not Found.', 'There\'s no field groups in this theme. Make sure to generate your migration in PHP or place your file in the right place.');
         }
         
-        return $this->createIntroPageContent('The following fields has been found.', 'Click on the button below to generate a ACF Json Migration', $groups);
+        return $this->createIntroPageContent('The following fields has been found.', 'Click on the button below to generate a ACF Json Migration', $this->groups);
     }
 
     private function createIntroPageContent($title, $message, $field_groups = null) 
     {
-
         $html = new DOMDocument('1.0','iso-8859-1' );
         $html->formatOutput = true;
 
@@ -79,17 +78,47 @@ class AcfPhpToJson {
         return $html->saveHTML();
     }
 
-    /**
-     * 
-     */
-    private function renderConvertPage() {
-        $groups = $this->get_acf_field_goups();
-        $output = [];
-        foreach ($groups as $group) {
-            $output[] = $this->convertGroupToJson($group);
-        }
+    private function renderConvertPage() 
+    {
+        return $this->createConvertPageContent('You converted the following field groups', 'Copy the Json output with your migration', $this->groups);
+    }
 
-        return  '[' . implode(',', $output) . ']';
+    private function createConvertPageContent($title, $message, $field_groups = null) 
+    {
+        if ($field_groups) {
+            $output = [];
+            foreach ($field_groups as $group) {
+                $output[] = $this->convertGroupToJson($group);
+            }
+
+            $html = new DOMDocument('1.0','iso-8859-1' );
+            $html->formatOutput = true;
+    
+            $wrap = $html->createElement('div');
+            $wrap->setAttribute('class', 'wrap');
+    
+            $title = $html->createTextNode($title);
+            $header = $html->createElement('h1');
+            $header->appendChild($title);
+    
+            $paragraph = $html->createElement('p');
+            $message = $html->createTextNode($message);
+            $paragraph->appendChild($message);
+    
+            $wrap->appendChild($header);
+            $wrap->appendChild($paragraph);
+
+            $pretag = $html->createElement('pre');
+            $pretag->setAttribute('class', 'json-output');
+            $output_json = $html->createTextNode('[' . implode(',', $output) . ']');
+            $pretag->appendChild($output_json);
+
+            $wrap->appendChild($pretag);
+            
+            $html->appendChild($wrap);
+
+            return $html->saveHTML();
+        }
     }
 
     /**
@@ -97,7 +126,8 @@ class AcfPhpToJson {
      * 
      * @return array 
      */
-    private function get_acf_field_goups() {
+    private function get_acf_field_goups() 
+    {
         $field_groups = acf_get_local_field_groups();
         if (empty($field_groups)) {
             return [];
