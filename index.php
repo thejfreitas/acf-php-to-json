@@ -1,13 +1,19 @@
 <?php
 /*
 Plugin Name: ACF PHP to JSON Converter
-Description: Wordpress plugin responsible to convert Advanced Custom Fields migration in PHP to JSON format in order to provide a better experience to developers for legacy Wordpress websites.
-Version: 0.0.1
-Author: J. de Freitas
+Description: Convert Advanced Custom Fields Pro migration file from PHP to JSON format in order to provide a better experience to developers in legacy Wordpress websites.
+Version: 0.0.2
+Author: Jose de Freitas
 Author URI: https://jfreitas.dev
 */
 
 if( ! defined( 'ABSPATH' ) ) exit;
+
+function acf_php_to_json_scripts() {
+    wp_enqueue_media();
+    wp_enqueue_style( 'acf-php-to-json', plugins_url('css/acf-php-to-json.css', __FILE__), array(), null) ;
+}
+add_action( 'admin_enqueue_scripts', 'acf_php_to_json_scripts' );
 
 require_once dirname( __FILE__ ) . '/acf-php-to-json.php';
 
