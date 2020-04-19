@@ -3,3 +3,12 @@
   grid-template-columns: auto auto auto;
   grid-row-gap: 10px;
 }
+
+.json-output {
+  background-color: #ffffff !important;
+  padding: 10px;
+  height: 80vh;
+  width: 100%;
+  overflow: scroll;
+  cursor: text;
+}

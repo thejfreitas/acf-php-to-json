@@ -1,5 +1,6 @@
 <?php
-class AcfPhpToJson {
+class AcfPhpToJson 
+{
     public $page_title = 'ACF - Convert PHP migration fields to JSON';
     public $menu_title = 'Convert PHP to JSON';
     public $menu_slug = 'acf-php-to-json';
@@ -12,6 +13,11 @@ class AcfPhpToJson {
         $this->groups = $this->get_acf_field_goups();
     }
 
+    /**
+     * Render content based on url request
+     * 
+     * @return string
+     */
     public function renderMainPage() 
     { 
         if (!isset($_GET['convert']) || $_GET['convert'] !== 'json') {
@@ -21,6 +27,11 @@ class AcfPhpToJson {
         return $this->renderConvertPage();        
     }
 
+    /**
+     * Render Intro page based on field groups
+     * 
+     * @return string
+     */
     private function renderIntroPage() 
     {
         if (empty($this->groups)) {
@@ -30,6 +41,15 @@ class AcfPhpToJson {
         return $this->createIntroPageContent('The following fields has been found.', 'Click on the button below to generate a ACF Json Migration', $this->groups);
     }
 
+    /**
+     * Create content for Intro page
+     * 
+     * @param $title string
+     * @param $message string
+     * @param $field_groups array
+     * 
+     * @return string
+     */
     private function createIntroPageContent($title, $message, $field_groups = null) 
     {
         $html = new DOMDocument('1.0','iso-8859-1' );
@@ -83,6 +103,15 @@ class AcfPhpToJson {
         return $this->createConvertPageContent('You converted the following field groups', 'Copy the Json output with your migration', $this->groups);
     }
 
+    /**
+     * Create content for Convert page
+     * 
+     * @param $title string
+     * @param $message string
+     * @param $field_groups array
+     * 
+     * @return string
+     */
     private function createConvertPageContent($title, $message, $field_groups = null) 
     {
         if ($field_groups) {
