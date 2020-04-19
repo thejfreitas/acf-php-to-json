@@ -108,13 +108,21 @@ class AcfPhpToJson {
             $wrap->appendChild($header);
             $wrap->appendChild($paragraph);
 
-            $pretag = $html->createElement('pre');
+            $pretag = $html->createElement('textarea');
             $pretag->setAttribute('class', 'json-output');
+            $pretag->setAttribute('disabled', 'disabled');
             $output_json = $html->createTextNode('[' . implode(',', $output) . ']');
             $pretag->appendChild($output_json);
 
+            $copyButton = $html->createElement('a');
+            $copyButton->setAttribute('class', 'button button-primary copy-json');
+            $copyButton->setAttribute('href', '#');
+            $copyButtonText = $html->createTextNode('Copy JSON');
+            $copyButton->appendChild($copyButtonText);
+
             $wrap->appendChild($pretag);
-            
+            $wrap->appendChild($copyButton);
+
             $html->appendChild($wrap);
 
             return $html->saveHTML();
