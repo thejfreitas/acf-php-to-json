@@ -1,4 +1,4 @@
-=== ACF PHP to JSON ===
+=== ACF PHP to JSON Converter ===
 Contributors: Jose de Freitas
 Tags: php, json, convert, converter, acf, advanced, custom, field, fields
 Requires at least: 4.7.0
