@@ -10,7 +10,7 @@ class AcfPhpToJson
     
     function __construct()
     {
-        $this->groups = $this->get_acf_field_goups();
+        $this->groups = $this->get_acf_field_groups();
     }
 
     /**
@@ -163,7 +163,7 @@ class AcfPhpToJson
      * 
      * @return array 
      */
-    private function get_acf_field_goups() 
+    private function get_acf_field_groups() 
     {
         $field_groups = acf_get_local_field_groups();
         if (empty($field_groups)) {
