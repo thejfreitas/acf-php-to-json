@@ -38,7 +38,7 @@ if (! defined('ACF_PHP_TO_JSON_POST_TYPE')) {
 }
 
 if (! defined('ACF_PHP_TO_JSON_MENU_TITLE')) {
-    define('ACF_PHP_TO_JSON_MENU_TITLE', 'Convert PHP to JSON');
+    define('ACF_PHP_TO_JSON_MENU_TITLE', __('Convert PHP to JSON', 'acf-php-to-json'));
 }
 
 if (! defined('ACF_PHP_TO_JSON_BASENAME')) {

@@ -32,10 +32,10 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
         private function renderIntroPage() 
         {
             if (empty($this->groups)) {
-                return $this->createIntroPageContent('Field Groups Not Found.', 'There\'s no field groups in this theme. Make sure to generate your migration in PHP or place your file in the right place.');
+                return $this->createIntroPageContent(__('Field Groups Not Found.', 'acf-php-to-json'), __('There\'s no field groups in this theme. Make sure to generate your migration in PHP or place your file in the right place.', 'acf-php-to-json'));
             }
             
-            return $this->createIntroPageContent('The following fields has been found.', 'Click on the button below to generate a ACF Json Migration', $this->groups);
+            return $this->createIntroPageContent(__('The following fields has been found.', 'acf-php-to-json'), __('Click on the button below to generate a ACF Json Migration', 'acf-php-to-json'), $this->groups);
         }
 
         /**
@@ -84,7 +84,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
                 $link->setAttribute('href', 'edit.php?post_type=acf-field-group&page=acf-php-to-json&convert=json');
                 $link->setAttribute('class', 'button button-primary');
 
-                $link_text = $html->createTextNode('Convert Field Groups to JSON');
+                $link_text = $html->createTextNode(__('Convert Field Groups to JSON', 'acf-php-to-json'));
                 $link->appendChild($link_text);
 
                 $wrap->appendChild($link);
@@ -97,7 +97,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
 
         private function renderConvertPage() 
         {
-            return $this->createConvertPageContent('You converted the following field groups', 'Copy the Json output with your migration', $this->groups);
+            return $this->createConvertPageContent(__('You converted the following field groups', 'acf-php-to-json'), __('Copy the Json output with your migration', 'acf-php-to-json'), $this->groups);
         }
 
         /**
@@ -143,7 +143,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
                 $copyButton = $html->createElement('a');
                 $copyButton->setAttribute('class', 'button button-primary copy-json');
                 $copyButton->setAttribute('href', '#');
-                $copyButtonText = $html->createTextNode('Copy JSON');
+                $copyButtonText = $html->createTextNode(__('Copy JSON', 'acf-php-to-json'));
                 $copyButton->appendChild($copyButtonText);
 
                 $wrap->appendChild($pretag);
