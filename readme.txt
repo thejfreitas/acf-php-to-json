@@ -1,8 +1,8 @@
 === ACF PHP to JSON Converter ===
-Contributors: Jose de Freitas
-Tags: php, json, convert, converter, acf, advanced, custom, field, fields
+Contributors: Jose de Freitas (juniormfreitas)
+Tags: php, json, converter, acf, advanced, custom, field, fields
 Requires at least: 4.7.0
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,11 @@ Wordpress plugin responsible to convert Advanced Custom Fields Pro migration fil
 
 == Changelog ==
 
-= 1.0.0 =
-*Release Date - 19 April 2020*
+= 0.1.1 =
+*30 August 2020*
+* Restructuring and reordering files
+* Typo corrections
 
+= 0.1.0 =
+*Beta Release Date - 19 April 2020*
 * Initial release
