@@ -7,7 +7,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
         
         function __construct()
         {
-            $this->groups = $this->get_acf_field_groups();
+            $this->groups = $this->getAcfFieldGroups();
         }
 
         /**
@@ -23,6 +23,8 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
             
             return $this->renderConvertPage();        
         }
+
+        
 
         /**
          * Render Intro page based on field groups
@@ -160,7 +162,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
          * 
          * @return array 
          */
-        private function get_acf_field_groups() 
+        private function getAcfFieldGroups() 
         {
             $field_groups = acf_get_local_field_groups();
             if (empty($field_groups)) {

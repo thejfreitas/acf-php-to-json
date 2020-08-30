@@ -52,19 +52,19 @@ if (! defined('ACF_PHP_TO_JSON_PLUGIN_DIR')) {
 if (is_admin()) {
     require_once ACF_PHP_TO_JSON_PLUGIN_DIR . '/admin/acf-php-to-json-admin.php';
 
-    function acf_php_to_json_scripts() {
+    function acf_php_to_json_admin_scripts() {
         wp_enqueue_media();
         wp_enqueue_style( ACF_PHP_TO_JSON_SLUG, plugins_url('/admin/css/acf-php-to-json.css', __FILE__), array(), null);
         wp_enqueue_script( ACF_PHP_TO_JSON_SLUG, plugins_url('/admin/js/acf-php-to-json.js', __FILE__), array(), '1.0', true );
     }
-    add_action( 'admin_enqueue_scripts', 'acf_php_to_json_scripts' );
+    add_action( 'admin_enqueue_scripts', 'acf_php_to_json_admin_scripts' );
     
-    function initPlugin() {
+    function acf_php_to_json_init_plugin() {
         $PhpToJson = new Acf_Php_To_Json_Converter;
         add_submenu_page('edit.php?post_type=' . ACF_PHP_TO_JSON_POST_TYPE, ACF_PHP_TO_JSON_PAGE_TITLE, ACF_PHP_TO_JSON_MENU_TITLE, 'manage_options', ACF_PHP_TO_JSON_SLUG, function() use ($PhpToJson) {
             echo $PhpToJson->renderMainPage();
         });
     }
     
-    add_action('admin_menu', 'initPlugin', 20);
+    add_action('admin_menu', 'acf_php_to_json_init_plugin', 20);
 }
