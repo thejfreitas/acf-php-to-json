@@ -4,10 +4,32 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
     class Acf_Php_To_Json_Converter
     {
         private $groups = [];
+        private $plugin_version;
+        private $plugin_name;
+        private $plugin_slug;
         
-        function __construct()
+        function __construct($basename, $slug, $version)
         {
             $this->groups = $this->getAcfFieldGroups();
+            $this->plugin_version = $version;
+            $this->plugin_name = $basename;
+            $this->plugin_slug = $slug;
+
+            add_action('admin_footer_text', [$this, 'acfPhpToJsonFooter']);
+            add_action('admin_notices', [$this, 'showNotices']);
+        }
+
+        // TODO: Render only on the plugin page
+        public function acfPhpToJsonFooter() {
+            return __($this->plugin_name . ' - ' . 'Version - ', $this->plugin_slug) . $this->plugin_version;
+        }
+
+        public function showNotices() {
+            if (! $this->isDependencyActive()) : ?>
+                <div class="error notice">
+                    <p>Advanced Custom Fields Plugin is not active!</p>
+                </div>
+            <?php endif;
         }
 
         /**
@@ -21,10 +43,13 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
                 return $this->renderIntroPage();
             }
             
-            return $this->renderConvertPage();        
+            return $this->renderConvertPage();  
         }
 
         
+        private function isDependencyActive() {
+            return is_plugin_active('advanced-custom-fields-pro/acf.php') || is_plugin_active('advanced-custom-fields/acf.php');
+        }
 
         /**
          * Render Intro page based on field groups
@@ -34,10 +59,10 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
         private function renderIntroPage() 
         {
             if (empty($this->groups)) {
-                return $this->createIntroPageContent(__('Field Groups Not Found.', 'acf-php-to-json'), __('There\'s no field groups in this theme. Make sure to generate your migration in PHP or place your file in the right place.', 'acf-php-to-json'));
+                return $this->createIntroPageContent(__('Field Groups Not Found.', $this->plugin_slug), __('There\'s no field groups in this theme. Make sure to generate your migration in PHP or place your file in the right place.', $this->plugin_slug));
             }
             
-            return $this->createIntroPageContent(__('The following fields has been found.', 'acf-php-to-json'), __('Click on the button below to generate a ACF Json Migration', 'acf-php-to-json'), $this->groups);
+            return $this->createIntroPageContent(__('The following fields has been found.', $this->plugin_slug), __('Click on the button below to generate a ACF Json Migration', $this->plugin_slug), $this->groups);
         }
 
         /**
@@ -86,7 +111,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
                 $link->setAttribute('href', 'edit.php?post_type=acf-field-group&page=acf-php-to-json&convert=json');
                 $link->setAttribute('class', 'button button-primary');
 
-                $link_text = $html->createTextNode(__('Convert Field Groups to JSON', 'acf-php-to-json'));
+                $link_text = $html->createTextNode(__('Convert Field Groups to JSON', $this->plugin_slug));
                 $link->appendChild($link_text);
 
                 $wrap->appendChild($link);
@@ -97,9 +122,14 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
             return $html->saveHTML();
         }
 
+        /**
+         * Render Convert page based on converted field groups
+         * 
+         * @return string
+         */
         private function renderConvertPage() 
         {
-            return $this->createConvertPageContent(__('You converted the following field groups', 'acf-php-to-json'), __('Copy the Json output with your migration', 'acf-php-to-json'), $this->groups);
+            return $this->createConvertPageContent(__('You converted the following field groups', $this->plugin_slug), __('Copy the Json output with your migration', $this->plugin_slug), $this->groups);
         }
 
         /**
@@ -145,7 +175,7 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
                 $copyButton = $html->createElement('a');
                 $copyButton->setAttribute('class', 'button button-primary copy-json');
                 $copyButton->setAttribute('href', '#');
-                $copyButtonText = $html->createTextNode(__('Copy JSON', 'acf-php-to-json'));
+                $copyButtonText = $html->createTextNode(__('Copy JSON', $this->plugin_slug));
                 $copyButton->appendChild($copyButtonText);
 
                 $wrap->appendChild($pretag);
@@ -164,14 +194,18 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
          */
         private function getAcfFieldGroups() 
         {
-            $field_groups = acf_get_local_field_groups();
-            if (empty($field_groups)) {
-                return [];
+            if (function_exists('acf_get_local_field_groups')) {
+                $field_groups = acf_get_local_field_groups();
+                if (empty($field_groups)) {
+                    return [];
+                }
+
+                return array_filter($field_groups, function($group) {
+                    return $group['local'] == 'php';
+                });
             }
 
-            return array_filter($field_groups, function($group) {
-                return $group['local'] == 'php';
-            });
+            return;
         }
 
         /**
@@ -193,5 +227,4 @@ if (! class_exists('Acf_Php_To_Json_Converter')) {
             return acf_json_encode( $group );
         }
     }
-
 }

@@ -38,7 +38,7 @@ if (! defined('ACF_PHP_TO_JSON_POST_TYPE')) {
 }
 
 if (! defined('ACF_PHP_TO_JSON_MENU_TITLE')) {
-    define('ACF_PHP_TO_JSON_MENU_TITLE', __('Convert PHP to JSON', 'acf-php-to-json'));
+    define('ACF_PHP_TO_JSON_MENU_TITLE', __('Convert PHP to JSON', ACF_PHP_TO_JSON_SLUG));
 }
 
 if (! defined('ACF_PHP_TO_JSON_BASENAME')) {
@@ -60,7 +60,7 @@ if (is_admin()) {
     add_action( 'admin_enqueue_scripts', 'acf_php_to_json_admin_scripts' );
     
     function acf_php_to_json_init_plugin() {
-        $PhpToJson = new Acf_Php_To_Json_Converter;
+        $PhpToJson = new Acf_Php_To_Json_Converter(ACF_PHP_TO_JSON_NAME, ACF_PHP_TO_JSON_SLUG, ACF_PHP_TO_JSON_VERSION);
         add_submenu_page('edit.php?post_type=' . ACF_PHP_TO_JSON_POST_TYPE, ACF_PHP_TO_JSON_PAGE_TITLE, ACF_PHP_TO_JSON_MENU_TITLE, 'manage_options', ACF_PHP_TO_JSON_SLUG, function() use ($PhpToJson) {
             echo $PhpToJson->renderMainPage();
         });
