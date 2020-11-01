@@ -1,0 +1,66 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2020-11-01 11:12-0600\n"
+"PO-Revision-Date: 2020-11-01 11:12-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: languages\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: acf-php-to-json.php:41
+msgid "Convert PHP to JSON"
+msgstr "Converter PHP para JSON"
+
+#: admin/acf-php-to-json-admin.php:25
+msgid " - "
+msgstr ""
+
+#: admin/acf-php-to-json-admin.php:38
+msgid "Advanced Custom Fields Plugin is not active!"
+msgstr "O Plugin Advanced Custom Fields não está ativo!"
+
+#: admin/acf-php-to-json-admin.php:84
+msgid "Field Groups Not Found."
+msgstr "Não foi encontrado nenhum grupo de campo."
+
+#: admin/acf-php-to-json-admin.php:84
+msgid ""
+"There's no field groups in this theme. Make sure to generate your migration "
+"in PHP or place your file in the right place."
+msgstr ""
+"Não há nenhum grupo de campo neste tema. Verifique se você gerou a migração "
+"de campos em PHP ou coloque o arquivo gerado no lugar correto."
+
+#: admin/acf-php-to-json-admin.php:87
+msgid "The following fields has been found."
+msgstr "Os campos abaixo foram encontrados."
+
+#: admin/acf-php-to-json-admin.php:87
+msgid "Click on the button below to generate a ACF Json Migration"
+msgstr ""
+"Clique no botão abaixo para gerar uma migração do plugin ACF em formato JSON"
+
+#: admin/acf-php-to-json-admin.php:136
+msgid "Convert Field Groups to JSON"
+msgstr "Converter grupo de campos para o formato JSON"
+
+#: admin/acf-php-to-json-admin.php:154
+msgid "You converted the following field groups"
+msgstr "Você converteu os seguintes grupos de campo"
+
+#: admin/acf-php-to-json-admin.php:154
+msgid "Copy the Json output with your migration"
+msgstr "Copie a saida em formato JSON com a sua migração"
+
+#: admin/acf-php-to-json-admin.php:200
+msgid "Copy JSON"
+msgstr "Copie o JSON"

@@ -49,6 +49,8 @@ if (!defined('ACF_PHP_TO_JSON_PLUGIN_DIR')) {
     define('ACF_PHP_TO_JSON_PLUGIN_DIR', plugin_dir_path(__FILE__));
 }
 
+load_plugin_textdomain(ACF_PHP_TO_JSON_SLUG, false, ACF_PHP_TO_JSON_SLUG . '/languages/');
+
 if (is_admin()) {
     require_once ACF_PHP_TO_JSON_PLUGIN_DIR . '/admin/acf-php-to-json-admin.php';
 

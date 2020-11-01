@@ -35,7 +35,7 @@ if (!class_exists('Acf_Php_To_Json_Converter')) {
                 $wrap->setAttribute('class', 'error notice');
 
                 $paragraph = $html->createElement('p');
-                $message = $html->createTextNode('Advanced Custom Fields Plugin is not active!');
+                $message = $html->createTextNode(__('Advanced Custom Fields Plugin is not active!'));
                 $paragraph->appendChild($message);
 
                 $wrap->appendChild($paragraph);
