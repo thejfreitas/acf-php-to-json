@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-11-01 11:12-0600\n"
-"PO-Revision-Date: 2020-11-01 11:12-0600\n"
+"POT-Creation-Date: 2020-11-01 13:21-0600\n"
+"PO-Revision-Date: 2020-11-01 13:22-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -21,8 +21,8 @@ msgid "Convert PHP to JSON"
 msgstr "Converter PHP para JSON"
 
 #: admin/acf-php-to-json-admin.php:25
-msgid " - "
-msgstr ""
+msgid "Version"
+msgstr "Versão"
 
 #: admin/acf-php-to-json-admin.php:38
 msgid "Advanced Custom Fields Plugin is not active!"
@@ -62,5 +62,8 @@ msgid "Copy the Json output with your migration"
 msgstr "Copie a saida em formato JSON com a sua migração"
 
 #: admin/acf-php-to-json-admin.php:200
-msgid "Copy JSON"
-msgstr "Copie o JSON"
+msgid "Copy JSON to clipboard"
+msgstr "Copiar JSON para área de transferência"
+
+#~ msgid "Copy JSON"
+#~ msgstr "Copie o JSON"

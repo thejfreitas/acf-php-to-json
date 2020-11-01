@@ -22,7 +22,7 @@ if (!class_exists('Acf_Php_To_Json_Converter')) {
         // TODO: Render only on the plugin page
         public function acfPhpToJsonFooter()
         {
-            return __($this->plugin_name . ' - ' . 'Version - ', $this->plugin_slug) . $this->plugin_version;
+            return __($this->plugin_name) . ' - ' . __('Version', $this->plugin_slug)  . ' - ' . $this->plugin_version;
         }
 
         public function showNotices()
@@ -35,7 +35,7 @@ if (!class_exists('Acf_Php_To_Json_Converter')) {
                 $wrap->setAttribute('class', 'error notice');
 
                 $paragraph = $html->createElement('p');
-                $message = $html->createTextNode(__('Advanced Custom Fields Plugin is not active!'));
+                $message = $html->createTextNode(__('Advanced Custom Fields Plugin is not active!', $this->plugin_slug));
                 $paragraph->appendChild($message);
 
                 $wrap->appendChild($paragraph);
@@ -197,7 +197,7 @@ if (!class_exists('Acf_Php_To_Json_Converter')) {
                 $copyButton = $html->createElement('a');
                 $copyButton->setAttribute('class', 'button button-primary copy-json');
                 $copyButton->setAttribute('href', '#');
-                $copyButtonText = $html->createTextNode(__('Copy JSON', $this->plugin_slug));
+                $copyButtonText = $html->createTextNode(__('Copy JSON to clipboard', $this->plugin_slug));
                 $copyButton->appendChild($copyButtonText);
 
                 $wrap->appendChild($pretag);
