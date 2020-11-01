@@ -27,11 +27,22 @@ if (!class_exists('Acf_Php_To_Json_Converter')) {
 
         public function showNotices()
         {
-            if (!$this->isDependencyActive()) : ?>
-                <div class="error notice">
-                    <p>Advanced Custom Fields Plugin is not active!</p>
-                </div>
-<?php endif;
+            if (!$this->isDependencyActive()) {
+                $html = new DOMDocument('1.0', 'iso-8859-1');
+                $html->formatOutput = true;
+
+                $wrap = $html->createElement('div');
+                $wrap->setAttribute('class', 'error notice');
+
+                $paragraph = $html->createElement('p');
+                $message = $html->createTextNode('Advanced Custom Fields Plugin is not active!');
+                $paragraph->appendChild($message);
+
+                $wrap->appendChild($paragraph);
+                $html->appendChild($wrap);
+
+                return $html->saveHTML();
+            }
         }
 
         /**
@@ -48,7 +59,11 @@ if (!class_exists('Acf_Php_To_Json_Converter')) {
             return $this->renderConvertPage();
         }
 
-
+        /**
+         * Check if dependency plugin is active
+         * 
+         * @return boolean
+         */
         private function isDependencyActive()
         {
             if (function_exists('is_plugin_active')) {
