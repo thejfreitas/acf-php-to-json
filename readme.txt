@@ -19,11 +19,11 @@ Wordpress plugin responsible to convert Advanced Custom Fields Pro migration fil
 
 == Changelog ==
 
-= 0.1.1 =
-*30 August 2020*
+= 0.0.2 =
+* Alpha Release Date - 30 August 2020*
 * Restructuring and reordering files
 * Typo corrections
 
-= 0.1.0 =
-*Beta Release Date - 19 April 2020*
+= 0.0.1 =
+* Pre-alpha Release Date - 19 April 2020*
 * Initial release
