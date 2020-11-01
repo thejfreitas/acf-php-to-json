@@ -57,7 +57,7 @@ if (is_admin()) {
     function acf_php_to_json_admin_scripts()
     {
         wp_enqueue_media();
-        wp_enqueue_style(ACF_PHP_TO_JSON_SLUG, plugins_url('/admin/css/acf-php-to-json.css', __FILE__), array(), null);
+        wp_enqueue_style(ACF_PHP_TO_JSON_SLUG, plugins_url('/admin/css/acf-php-to-json.css', __FILE__), array(), '1.0');
         wp_enqueue_script(ACF_PHP_TO_JSON_SLUG, plugins_url('/admin/js/acf-php-to-json.js', __FILE__), array(), '1.0', true);
     }
     add_action('admin_enqueue_scripts', 'acf_php_to_json_admin_scripts');

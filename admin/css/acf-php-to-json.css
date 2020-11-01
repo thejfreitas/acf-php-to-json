@@ -7,7 +7,7 @@
 .json-output {
   background-color: #ffffff !important;
   padding: 10px;
-  height: 80vh;
+  height: calc(100vh - 225px);
   width: 100%;
   overflow: scroll;
   cursor: text;
